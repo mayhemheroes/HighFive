@@ -34,6 +34,7 @@ option(HIGHFIVE_USE_XTENSOR "Enable xtensor testing" ${USE_XTENSOR})
 option(HIGHFIVE_EXAMPLES "Compile examples" ON)
 option(HIGHFIVE_PARALLEL_HDF5 "Enable Parallel HDF5 support" OFF)
 option(HIGHFIVE_BUILD_DOCS "Enable documentation building" ON)
+option(HIGHFIVE_FUZZ "Instrument library for fuzzing and build harness" OFF)
 
 # In deployments we probably don't want/cant have dynamic dependencies
 option(HIGHFIVE_USE_INSTALL_DEPS "End applications by default use detected dependencies here" OFF)
@@ -121,4 +122,10 @@ endif()
 
 if(HIGHFIVE_BUILD_DOCS)
   add_subdirectory(doc)
+endif()
+
+if (HIGHFIVE_FUZZ)
+    add_compile_options(-fsanitize=fuzzer-no-link)
+    add_link_options(-fsanitize=fuzzer-no-link)
+    add_subdirectory(mayhem)
 endif()

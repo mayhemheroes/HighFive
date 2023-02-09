@@ -1,0 +1,6 @@
+project: HighFive
+target: parse-fuzz
+
+cmds:
+  - cmd: /fuzz_highfive
+    libfuzzer: true
