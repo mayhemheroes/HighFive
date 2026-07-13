@@ -1,0 +1,6 @@
+project: highfive
+target: parse-fuzz
+
+cmds:
+  - cmd: /mayhem/fuzz_highfive
+    libfuzzer: true
